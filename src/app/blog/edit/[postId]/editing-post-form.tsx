@@ -31,7 +31,9 @@ const EditingPostForm = ({ id }: { id: string }) => {
 				{
 					headers: {
 						'Content-Type': 'application/json',
+						'Cache-Control': 'no-store',
 					},
+					cache: 'no-store',
 				},
 			);
 

@@ -8,12 +8,9 @@ import {
 	TextField,
 	Typography,
 } from '@mui/material';
-import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const AddingPostPage = () => {
-	const router = useRouter();
-
 	const [author, setAuthor] = useState('');
 	const [title, setTitle] = useState('');
 	const [text, setText] = useState('');
@@ -48,7 +45,9 @@ const AddingPostPage = () => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					'Cache-Control': 'no-store',
 				},
+				cache: 'no-store',
 				body: JSON.stringify({ author, title, text }),
 			});
 
@@ -60,7 +59,6 @@ const AddingPostPage = () => {
 				setAuthor('');
 				setTitle('');
 				setText('');
-				router.refresh();
 			}
 		} catch (error) {
 			console.error(error);

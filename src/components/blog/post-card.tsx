@@ -13,11 +13,8 @@ import Link from 'next/link';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import React from 'react';
-import { useRouter } from 'next/navigation';
 
 const PostCard = ({ item }: { item: IPost }) => {
-	const router = useRouter();
-
 	const deletePost = async (id: number) => {
 		try {
 			const response = await fetch(
@@ -26,13 +23,14 @@ const PostCard = ({ item }: { item: IPost }) => {
 					method: 'DELETE',
 					headers: {
 						'Content-Type': 'application/json',
+						'Cache-Control': 'no-store',
 					},
+					cache: 'no-store',
 				},
 			);
 
 			if (response.ok) {
 				console.log('Post deleted successfully');
-				router.refresh();
 				window.location.reload();
 			}
 		} catch (error) {
