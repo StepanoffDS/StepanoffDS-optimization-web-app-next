@@ -10,7 +10,6 @@ import {
 } from '@mui/material';
 import LinkNext from 'next/link';
 import { useRouter } from 'next/navigation';
-import React from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 
 const EditingPostForm = ({ id }: { id: string }) => {
