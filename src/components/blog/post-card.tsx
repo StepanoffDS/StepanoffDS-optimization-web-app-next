@@ -10,11 +10,14 @@ import {
 	CardActions,
 } from '@mui/material';
 import Link from 'next/link';
-import React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import React from 'react';
+import { useRouter } from 'next/navigation';
 
 const PostCard = ({ item }: { item: IPost }) => {
+	const router = useRouter();
+
 	const deletePost = async (id: number) => {
 		try {
 			const response = await fetch(
@@ -29,6 +32,7 @@ const PostCard = ({ item }: { item: IPost }) => {
 
 			if (response.ok) {
 				console.log('Post deleted successfully');
+				router.refresh();
 				window.location.reload();
 			}
 		} catch (error) {

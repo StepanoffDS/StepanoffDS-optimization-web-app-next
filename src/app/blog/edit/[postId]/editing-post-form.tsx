@@ -9,9 +9,12 @@ import {
 	Link,
 } from '@mui/material';
 import LinkNext from 'next/link';
+import { useRouter } from 'next/navigation';
+import React from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 
 const EditingPostForm = ({ id }: { id: string }) => {
+	const router = useRouter();
 	const [author, setAuthor] = useState('');
 	const [title, setTitle] = useState('');
 	const [text, setText] = useState('');
@@ -30,7 +33,6 @@ const EditingPostForm = ({ id }: { id: string }) => {
 					headers: {
 						'Content-Type': 'application/json',
 					},
-					next: { revalidate: 3600 },
 				},
 			);
 
@@ -39,6 +41,7 @@ const EditingPostForm = ({ id }: { id: string }) => {
 				setAuthor(json.author);
 				setTitle(json.title);
 				setText(json.text);
+				router.refresh();
 			}
 		} catch (error) {
 			console.error(error);
